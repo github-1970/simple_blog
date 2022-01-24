@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en"
+  dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible"
+    content="IE=edge">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+  <title>Simple Blog</title>
+  <link rel="stylesheet"
+    href="css/styles.css">
+  <script defer
+    type="module"
+    src="js/index.js"></script>
+</head>
+
+<body class="position-relative">
+
+  <!-- navbar -->
+  <div class="navbar-container fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div
+        class="container py-2 d-flex justify-content-between flex-row-reverse">
+        <a class="navbar-brand"
+          href="#"><span
+            class="text-primary">RasoolBlog</span><span>.ir</span>
+        </a>
+        <button class="navbar-toggler"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse d-inline-block-i"
+          id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center mt-3 mt-md-0">
+            <li class="nav-item">
+              <a class="nav-link active"
+                href="#">خانه</a>
+            </li>
+
+            <li
+              class="dropdown d-block d-md-flex align-items-center ms-0 ms-md-3">
+              <a href="#"
+                class="dropdown-toggle nav-link"
+                data-bs-toggle="dropdown">
+                دسته‌بندی‌ها
+              </a>
+              <ul class="dropdown-menu text-center">
+                <li>
+                  <a class="dropdown-item"
+                    href="#">طبیعت</a>
+                </li>
+                <li>
+                  <a class="dropdown-item"
+                    href="#">گردشگری</a>
+                </li>
+                <li>
+                  <a class="dropdown-item"
+                    href="#">جهانگردی</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav ms-auto me-0 me-md-4">
+            <li class="nav-item">
+              <a href="#" class="nav-link d-flex align-items-center justify-content-center">
+                <span class="me-2">ورود</span>
+                <i class="fas fa-user fa-lg"></i>
+              </a>
+            </li>
+
+            <li class="nav-item signup">
+              <a href="#" class="nav-link d-flex align-items-center justify-content-center">
+                <span class="me-2">ثبت نام</span>
+                <i class="fas fa-user-plus fa-lg"></i>
+              </a>
+            </li>
+
+            <!-- for sign out, when logged in -->
+            <li class="nav-item d-none">
+              <a href="#" class="nav-link d-flex align-items-center">
+                <span class="me-2">خروج</span>
+                <i class="fas fa-sign-out-alt fa-lg"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="progress-container">
+      <div class="p-progress-bar"></div>
+    </div>
+  </div>
+  <!-- end navbar -->
+
+  <!-- header -->
+  <header id="header">
+    <div id="carousel"
+      class="carousel carousel-light slide"
+      data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button data-bs-target="#carousel"
+          data-bs-slide-to="0"
+          class="active"></button>
+        <button data-bs-target="#carousel"
+          data-bs-slide-to="1"></button>
+        <button data-bs-target="#carousel"
+          data-bs-slide-to="2"></button>
+      </div>
+
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="img/post1.jpg"
+            class="d-block w-100"
+            alt="post1">
+          <div class="carousel-caption">
+            <h2>لورم ایپسوم متن </h2>
+            <p class="my-3">
+              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+              استفاده از طراحان گرافیک است، چاپگرها و ...
+            </p>
+            <button class="btn btn-primary">مشاهده</button>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <img src="img/post2.jpg"
+            class="d-block w-100"
+            alt="post2">
+          <div class="carousel-caption">
+            <h2>لورم ایپسوم متن </h2>
+            <p class="my-3">
+              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+              استفاده از طراحان گرافیک است، چاپگرها و ...
+            </p>
+            <button class="btn btn-primary">مشاهده</button>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <img src="img/post3.jpg"
+            class="d-block w-100"
+            alt="post3">
+          <div class="carousel-caption">
+            <h2>لورم ایپسوم متن </h2>
+            <p class="my-3">
+              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+              استفاده از طراحان گرافیک است، چاپگرها و ...
+            </p>
+            <button class="btn btn-primary">مشاهده</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="carousel-control-prev"
+        data-bs-target="#carousel"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"
+          aria-hidden="true"></span>
+      </button>
+      <button class="carousel-control-next"
+        data-bs-target="#carousel"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </header>
+  <!-- end header -->
+
+  <!-- main -->
+  <div class="main-container my-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-4 order-2 order-md-0 mt-5 mt-md-0">
+          <aside>
+            <div class="card bg-light">
+              <div class="card-body">
+                <h4 class="mb-3">جستجو در مقالات وبلاگ</h4>
+
+                <form action="#"
+                  method="get">
+                  <div class="input-group">
+                    <input type="text"
+                      class="form-control shadow-none"
+                      id="searchInput"
+                      name="search"
+                      placeholder="جستجو...">
+                    <button type="submit"
+                      class="btn btn-outline-primary">
+                      <i class="fas fa-search fa-lg"></i>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="list-group mt-4">
+              <div class="list-group-item bg-light">
+                <h4>دسته‌بندی‌ها</h4>
+              </div>
+
+              <!-- style for active item
+            <div class="list-group-item list-group-item-action active">
+              <a href="#" class="d-flex align-items-center justify-content-lg-between active">
+                <span>طبیعت</span>
+                <span class="badge bg-primary rounded-pill bg-light text-dark">14</span>
+              </a>
+            </div> -->
+
+              <div class="list-group-item list-group-item-action">
+                <a href="#"
+                  class="d-flex align-items-center justify-content-lg-between active">
+                  <span>طبیعت</span>
+                  <span class="badge bg-primary rounded-pill">14</span>
+                </a>
+              </div>
+
+              <div class="list-group-item list-group-item-action">
+                <a href="#"
+                  class="d-flex align-items-center justify-content-lg-between">
+                  <span>گردشگری</span>
+                  <span class="badge bg-primary rounded-pill">5</span>
+                </a>
+              </div>
+
+              <div class="list-group-item list-group-item-action">
+                <a href="#"
+                  class="d-flex align-items-center justify-content-lg-between">
+                  <span>جهانگردی</span>
+                  <span class="badge bg-primary rounded-pill">1</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="card bg-light mt-4">
+              <div class="card-body">
+                <h4 class="mb-3">عضویت در خبرنامه</h4>
+
+                <form action="#"
+                  method="get">
+                  <div class="form-floating">
+                    <input type="text"
+                      class="form-control"
+                      id="newslettersText"
+                      placeholder="نام خود را وارد کنید...">
+                    <label for="newslettersText">نام خود را وارد کنید...</label>
+                  </div>
+
+                  <div class="form-floating mt-3">
+                    <input type="email"
+                      class="form-control"
+                      id="newslettersEmail"
+                      placeholder="ایمیل خود را وارد کنید...">
+                    <label for="newslettersEmail">ایمیل خود را وارد
+                      کنید...</label>
+                  </div>
+                  <input type="submit"
+                    class="btn btn-outline-primary w-100 mt-3"
+                    value="عضویت">
+                </form>
+              </div>
+            </div>
+
+            <div class="card bg-light mt-4">
+              <div class="card-header">
+                <h4>درباره ما</h4>
+              </div>
+
+              <div class="card-body">
+                <p>
+                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و
+                  با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و
+                  مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی
+                  تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای
+                  کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و
+                  آینده، شناخت فراوان جامعه و متخصصان را می طلبد.
+                </p>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="col-12 col-md-8">
+          <main class="main" id="homeMain">
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <div class="card">
+                  <a href="post.html?id=1">
+                    <img src="img/post1.jpg"
+                      class="card-img-top"
+                      alt="post1">
+                  </a>
+
+                  <div class="card-body">
+                    <div
+                      class="card-title d-flex align-items-center justify-content-between">
+                      <a href="post.html?id=1">
+                        <h5>جهانگرد کیست؟</h5>
+                      </a>
+
+                      <a href="#">
+                        <span class="badge bg-secondary">جهانگردی</span>
+                      </a>
+                    </div>
+
+                    <p class="card-text my-3">
+                      لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ،
+                      و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه
+                      روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای
+                      شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف
+                      بهبود ابزارهای کاربردی می باشد، کتابهای ...
+                    </p>
+
+                    <div
+                      class="d-flex align-items-center justify-content-between">
+                      <a href="post.html?id=1"
+                        class="btn btn-outline-primary">مشاهده</a>
+
+                      <div>
+                        <span class="text-muted">نویسنده: </span>
+                        <span>رسول سعیدی</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <div class="card">
+                  <a href="post.html?id=2">
+                    <img src="img/post2.jpg"
+                      class="card-img-top"
+                      alt="post2">
+                  </a>
+
+                  <div class="card-body">
+                    <div
+                      class="card-title d-flex align-items-center justify-content-between">
+                      <a href="post.html?id=2">
+                        <h5>نحوه رشد گیاهان</h5>
+                      </a>
+
+                      <a href="#">
+                        <span class="badge bg-secondary">طبیعت</span>
+                      </a>
+                    </div>
+
+                    <p class="card-text my-3">
+                      لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ،
+                      و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه
+                      روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای
+                      شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف
+                      بهبود ابزارهای کاربردی می باشد، کتابهای ...
+                    </p>
+
+                    <div
+                      class="d-flex align-items-center justify-content-between">
+                      <a href="post.html?id=2"
+                        class="btn btn-outline-primary">مشاهده</a>
+
+                      <div>
+                        <span class="text-muted">نویسنده: </span>
+                        <span>سینا کاظمی</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <div class="card">
+                  <a href="post.html?id=3">
+                    <img src="img/post3.jpg"
+                      class="card-img-top"
+                      alt="post3">
+                  </a>
+
+                  <div class="card-body">
+                    <div
+                      class="card-title d-flex align-items-center justify-content-between">
+                      <a href="post.html?id=3">
+                        <h5>چگونه به سفر برویم؟</h5>
+                      </a>
+
+                      <a href="#">
+                        <span class="badge bg-secondary">گردشگردی</span>
+                      </a>
+                    </div>
+
+                    <p class="card-text my-3">
+                      لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ،
+                      و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه
+                      روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای
+                      شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف
+                      بهبود ابزارهای کاربردی می باشد، کتابهای ...
+                    </p>
+
+                    <div
+                      class="d-flex align-items-center justify-content-between">
+                      <a href="post.html?id=3"
+                        class="btn btn-outline-primary">مشاهده</a>
+
+                      <div>
+                        <span class="text-muted">نویسنده: </span>
+                        <span>پارسا مرتضوی</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end main -->
+
+  <!-- footer -->
+  <footer class="mt-4">
+    <div
+      class="footer text-center bg-dark text-white d-flex justify-content-center align-items-center flex-column position-absolute bottom-0 w-100">
+      <p>
+        تمام حقوق این وبسایت متعلق به
+        <span class="text-primary">خودم</span>
+        می باشد
+      </p>
+
+      <div class="media mt-3">
+        <a href="#">
+          <i class="fab fa-facebook fa-2x"></i>
+        </a>
+
+        <a href="#">
+          <i class="fab fa-instagram fa-2x mx-2"></i>
+        </a>
+
+        <a href="#">
+          <i class="fab fa-telegram fa-2x"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-location"></div>
+  </footer>
+  <!-- end footer -->
+</body>
+
+</html>

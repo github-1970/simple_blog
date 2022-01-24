@@ -1,0 +1,83 @@
+.main-container{
+  aside{
+    position: sticky;
+    top: 5.5rem;
+
+    &#postAside{
+      margin-top: 3rem;
+    }
+  }
+
+  .main#homeMain{
+    .row{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 1.5rem;
+      
+      .col-md-6{
+        width: 100%;
+      }
+
+      @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card{
+      img{
+        height: 20rem;
+      }
+    }
+  }
+}
+
+// post page
+.main#psotMain{
+  .card{
+    border: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    &-img-top{
+      min-height: 300px;
+      max-height: 85vh;
+    }
+  }
+
+  .comments{
+    .comments-item{
+      display: flex;
+
+      &:not(:nth-child(1), &.comments-item-child){
+        margin-top:  2.5rem;
+      }
+
+      &.comments-item-child{
+        margin-top:  1rem;
+        margin-right: 2rem;
+
+        .comments-item-content{
+          background: linear-gradient(45deg, rgba(white, 1), rgba(230, 227, 227, 0.2), rgba(230, 227, 227, 0.3), rgba(230, 227, 227, 0.4), rgba(230, 227, 227, 0.5)) ;
+        }
+      }
+
+      img{
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50rem;
+        margin: 1px;
+        outline: 1px solid gray;
+        outline-offset: 2px;
+      }
+
+      &-content{
+        border-radius: .3rem;
+        box-shadow: 0 0 .1rem black;
+        padding: 1rem;
+
+        background: linear-gradient(45deg, rgba(230, 227, 227, 0.5), rgba(230, 227, 227, 0.4), rgba(230, 227, 227, 0.3), rgba(230, 227, 227, 0.2), rgba(white, 1));
+      }
+    }
+  }
+}
+// end post page

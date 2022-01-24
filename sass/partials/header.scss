@@ -1,0 +1,45 @@
+// navbar
+.signup{
+  border-right: 1px solid whitesmoke;
+
+  @media screen and (max-width: 768px) {
+    border-right: none;
+  }
+}
+// end navbar
+
+// header
+.carousel {
+  .carousel-item {
+    img {
+      height: 700px;
+      min-height: 350px;
+      max-height: 88vh;
+    }
+
+    .carousel-caption {
+      margin-bottom: 3rem;
+    }
+  }
+
+  // convert left to right slider
+  .carousel-control-next {
+    right: 0;
+  }
+
+  .carousel-control-prev {
+    right: unset;
+    left: 0;
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    transform: rotate(180deg);
+  }
+
+  .carousel-indicators {
+    flex-direction: row-reverse;
+  }
+  // end convert left to right slider
+}
+// end header
