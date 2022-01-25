@@ -2,10 +2,6 @@
   aside{
     position: sticky;
     top: 5.5rem;
-
-    &#postAside{
-      margin-top: 3rem;
-    }
   }
 
   .main#homeMain{
@@ -33,6 +29,8 @@
 
 // post page
 .main#psotMain{
+  margin-top: 2.5rem;
+
   .card{
     border: none;
     border-bottom-left-radius: 0;
@@ -74,8 +72,20 @@
         border-radius: .3rem;
         box-shadow: 0 0 .1rem black;
         padding: 1rem;
+        position: relative;
 
         background: linear-gradient(45deg, rgba(230, 227, 227, 0.5), rgba(230, 227, 227, 0.4), rgba(230, 227, 227, 0.3), rgba(230, 227, 227, 0.2), rgba(white, 1));
+
+        &::before{
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          transform: translate(.8rem, 1.7rem) rotate(-90deg);
+          border-width: .4rem;
+          border-style: solid;
+          border-color: #888 transparent transparent transparent;
+        }
       }
     }
   }

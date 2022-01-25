@@ -11163,9 +11163,6 @@ p {
   position: sticky;
   top: 5.5rem;
 }
-.main-container aside#postAside {
-  margin-top: 3rem;
-}
 .main-container .main#homeMain .row {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -11183,6 +11180,9 @@ p {
   height: 20rem;
 }
 
+.main#psotMain {
+  margin-top: 2.5rem;
+}
 .main#psotMain .card {
   border: none;
   border-bottom-left-radius: 0;
@@ -11217,7 +11217,18 @@ p {
   border-radius: 0.3rem;
   box-shadow: 0 0 0.1rem black;
   padding: 1rem;
+  position: relative;
   background: linear-gradient(45deg, rgba(230, 227, 227, 0.5), rgba(230, 227, 227, 0.4), rgba(230, 227, 227, 0.3), rgba(230, 227, 227, 0.2), white);
+}
+.main#psotMain .comments .comments-item-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(0.8rem, 1.7rem) rotate(-90deg);
+  border-width: 0.4rem;
+  border-style: solid;
+  border-color: #888 transparent transparent transparent;
 }
 
 footer .footer {
