@@ -49,18 +49,19 @@
                 دسته‌بندی‌ها
               </a>
               <ul class="dropdown-menu text-center">
+              <?php 
+              require_once $_SERVER['DOCUMENT_ROOT'] . '/modules/database/dbConnection.php';
+
+              $categories = $conn->query("SELECT * FROM categories");
+              $categories = $categories->fetchAll(PDO::FETCH_OBJ);
+
+              foreach($categories as $category){
+              ?>
                 <li>
                   <a class="dropdown-item"
-                    href="#">طبیعت</a>
+                    href="category.php?id=<?= $category->id ?>"><?= $category->title ?></a>
                 </li>
-                <li>
-                  <a class="dropdown-item"
-                    href="#">گردشگری</a>
-                </li>
-                <li>
-                  <a class="dropdown-item"
-                    href="#">جهانگردی</a>
-                </li>
+              <?php } ?>
               </ul>
             </li>
           </ul>
