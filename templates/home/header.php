@@ -1,52 +1,37 @@
+<?php
+  $posts = $conn->query("SELECT s.active, p.* FROM `posts_slider` s INNER JOIN `posts` p ON s.post_id = p.id ORDER BY s.active DESC;");
+  $posts = $posts->fetchAll(PDO::FETCH_OBJ);
+  $counter = 0;
+?>
+
 <!-- header -->
 <header id="header">
   <div id="carousel" class="carousel carousel-light slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
-      <button data-bs-target="#carousel" data-bs-slide-to="0" class="active"></button>
-      <button data-bs-target="#carousel" data-bs-slide-to="1"></button>
-      <button data-bs-target="#carousel" data-bs-slide-to="2"></button>
+    <?php foreach ($posts as $post){ ?>
+      <button data-bs-target="#carousel" data-bs-slide-to="<?= $counter++ ?>" class="<?= $post->active ? 'active' : ''; ?>"></button>
+    <?php } ?>
     </div>
 
     <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="img/post1.jpg" class="d-block w-100" alt="post1">
+    <?php foreach ($posts as $post){ ?>
+      <div class="carousel-item <?= $post->active ? 'active' : ''; ?>">
+        <img src="img/<?= $post->image ?>" class="d-block w-100" alt="<?= $post->title ?>">
         <div class="carousel-caption">
-          <h2>لورم ایپسوم متن </h2>
+          <h2>
+            <a href="post.php?id=<?= $post->id ?>"><?= $post->title ?></a>
+          </h2>
           <p class="my-3">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-            استفاده از طراحان گرافیک است، چاپگرها و ...
+            <?= textWrapper($post->text, 150) ?>
           </p>
-          <button class="btn btn-primary">مشاهده</button>
+          <a href="post.php?id=<?= $post->id ?>" class="btn btn-primary">مشاهده</a>
         </div>
       </div>
-
-      <div class="carousel-item">
-        <img src="img/post2.jpg" class="d-block w-100" alt="post2">
-        <div class="carousel-caption">
-          <h2>لورم ایپسوم متن </h2>
-          <p class="my-3">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-            استفاده از طراحان گرافیک است، چاپگرها و ...
-          </p>
-          <button class="btn btn-primary">مشاهده</button>
-        </div>
-      </div>
-
-      <div class="carousel-item">
-        <img src="img/post3.jpg" class="d-block w-100" alt="post3">
-        <div class="carousel-caption">
-          <h2>لورم ایپسوم متن </h2>
-          <p class="my-3">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-            استفاده از طراحان گرافیک است، چاپگرها و ...
-          </p>
-          <button class="btn btn-primary">مشاهده</button>
-        </div>
-      </div>
+    <?php } ?>
     </div>
 
     <button class="carousel-control-prev" data-bs-target="#carousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="carousel-control-prev-icon"></span>
     </button>
     <button class="carousel-control-next" data-bs-target="#carousel" data-bs-slide="next">
       <span class="carousel-control-next-icon"></span>
