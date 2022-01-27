@@ -1,27 +1,46 @@
 <div class="col-12 col-md-8">
   <main class="main " id="psotMain">
+    <!-- show post -->
     <div class="row">
       <div class="col-12">
         <div class="card">
-          <img src="img/post3.jpg" class="card-img-top" alt="post1">
+          <?php
+          $post_id_in_url = isset($_GET['id']) && $_GET['id'] && $_GET['id'] > 0 ? (int)$_GET['id'] : 1;
+
+          try{
+            $stmt = $conn->prepare("SELECT p.*, c.title AS category_title, u.name AS author_name FROM posts p INNER JOIN categories c ON p.category_id = c.id INNER JOIN users u ON p.author_id = u.id where p.id = :id");
+            $stmt->execute([':id' => $post_id_in_url]);
+            $post = $stmt->fetch(PDO::FETCH_OBJ);
+
+            if(!$post){
+              throw new PDOException();
+            }
+          }
+          catch(PDOException $e){
+            die('post not found');
+          }
+          
+          ?>
+
+          <img src="img/<?= $post->image ?>" class="card-img-top" alt="<?= $post->title ?>">
 
           <div class="card-body">
             <div class="card-title d-flex align-items-center justify-content-between mt-3 mb-4">
-              <h1>جهانگرد کیست؟</h1>
+              <h1><?= $post->title ?></h1>
 
-              <a href="#">
-                <span class="badge bg-secondary">جهانگردی</span>
+              <a href="category.php?category_id=<?= $post->id ?>">
+                <span class="badge bg-secondary"><?= $post->category_title ?></span>
               </a>
             </div>
 
             <p class="card-text my-3">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت
+              <?= $post->text ?>
             </p>
 
             <div class="d-flex align-items-center mb-3 mt-4">
               <div>
                 <span class="text-muted">نویسنده: </span>
-                <span>رسول سعیدی</span>
+                <span><?= $post->author_name ?></span>
               </div>
             </div>
           </div>
@@ -29,6 +48,7 @@
       </div>
     </div>
 
+    <!-- send comment -->
     <div class="row">
       <div class="col-12">
         <form action="#" method="post" class="comment-form border-top border-bottom py-4 my-2">
@@ -49,52 +69,74 @@
       </div>
     </div>
 
+    <!-- show comments -->
     <div class="row">
       <div class="col-12">
         <div class="comments-container mt-4">
+
+          <?php
+          $comments = $conn->query("SELECT c.*, u.name as author_name FROM comments c INNER JOIN users u ON c.author_id = u.id where post_id={$post->id}");
+
+          $comments = $comments->fetchALl(PDO::FETCH_OBJ);
+
+          // split parent and child comments
+          $parent_comments = array_filter($comments, function($_comment){
+            return $_comment->parent_id == null;
+          });
+          $child_comments = array_filter($comments, function($_comment){
+            return $_comment->parent_id != null;
+          });
+          ?>
+
           <h3 class="mb-3">نظرهای کاربران</h3>
           <span class="">تعداد نظرها: </span>
-          <span class="h5 fw-bold">8</span>
+          <span class="h5 fw-bold"><?= count($comments) ?></span>
 
           <div class="comments my-4">
+
+          <?php
+          $counter = 0;
+          foreach ($parent_comments as $parent_comment) {
+            $counter++
+          ?>
+
             <div class="comments-item">
-              <img src="img/profiles/user-profile-default.png" alt="user name" class="img-fluid" />
+              <img src="img/profiles/user-profile-default.png" alt="<?= $parent_comment->author_name ?>" class="img-fluid" />
 
               <div class="comments-item-content w-100 ms-2">
-                <h5 class="mb-4">سینا قاسمی</h5>
+                <h5 class="mb-4"><?= $parent_comment->author_name ?></h5>
+
                 <p>
-                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                  صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها
-                  و
+                  <?= $parent_comment->text ?>
                 </p>
 
                 <div class="responses">
                   <div class="d-flex mt-3 justify-content-end">
-                    <div class="btn btn-primary ms-auto" data-bs-toggle="collapse" data-bs-target="#responseForm1">پاسخ</div>
+                    <div class="btn btn-primary ms-auto" data-bs-toggle="collapse" data-bs-target="#responseForm<?= $counter ?>">پاسخ</div>
                   </div>
 
-                  <div class="collapse" id="responseForm1">
+                  <div class="collapse" id="responseForm<?= $counter ?>">
                     <div class="row">
                       <div class="col-12">
                         <form action="#" method="post" class="comment-form border-top border-bottom py-4 mb-2 mt-4">
                           <h3 class="mb-4">
                             <span>ارسال پاسخ به نظر</span>
-                            <span>سینا قاسمی</span>
+                            <span><?= $parent_comment->author_name ?></span>
                           </h3>
 
                           <div class="p-input-group mb-3">
-                            <label for="nameInput" class="mb-2">نام</label>
-                            <input type="text" name="name" class="form-control" id="nameInput" placeholder="نام خود را وارد کنید..." />
+                            <label for="nameInput<?= $counter ?>" class="mb-2">نام</label>
+                            <input type="text" name="name" class="form-control" id="nameInput<?= $counter ?>" placeholder="نام خود را وارد کنید..." />
                           </div>
 
                           <div class="p-input-group mb-3">
-                            <label for="nameInput" class="mb-2">متن پاسخ شما</label>
-                            <textarea name="name" class="form-control" id="nameInput" placeholder="متن پاسخ خود را وارد کنید..." rows="6"></textarea>
+                            <label for="textInput<?= $counter ?>" class="mb-2">متن پاسخ شما</label>
+                            <textarea name="text" class="form-control" id="textInput<?= $counter ?>" placeholder="متن پاسخ خود را وارد کنید..." rows="6"></textarea>
                           </div>
 
                           <button type="submit" class="btn btn-primary">ارسال</button>
 
-                          <input type="hidden" name="commentId" value="1">
+                          <input type="hidden" name="commentId" value="<?= $parent_comment->id ?>">
                         </form>
                       </div>
                     </div>
@@ -102,44 +144,55 @@
                 </div>
               </div>
             </div>
+
+
+          <?php
+          $child_comments_item = 
+          array_filter($child_comments, 
+          function($_child_comment) use ($parent_comment){
+            return $_child_comment->parent_id == $parent_comment->id;
+          });
+
+          foreach ($child_comments_item as $child_comment_item) {
+          ?>
 
             <div class="comments-item comments-item-child">
-              <img src="img/profiles/admin-profile-default.jpg" alt="user name" class="img-fluid" />
+              <img src="img/profiles/user-profile-default.png" alt="<?= $child_comment_item->author_name ?>" class="img-fluid" />
 
               <div class="comments-item-content w-100 ms-2">
-                <h5 class="mb-4">ادمین</h5>
+                <h5 class="mb-4"><?= $child_comment_item->author_name ?></h5>
+
                 <p>
-                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                  صنعت چاپ، و با استفاده از
+                  <?= $child_comment_item->text ?>
                 </p>
 
                 <div class="responses">
                   <div class="d-flex mt-3 justify-content-end">
-                    <div class="btn btn-primary ms-auto" data-bs-toggle="collapse" data-bs-target="#responseForm2">پاسخ</div>
+                    <div class="btn btn-primary ms-auto" data-bs-toggle="collapse" data-bs-target="#responseForm<?= $counter ?>">پاسخ</div>
                   </div>
 
-                  <div class="collapse" id="responseForm2">
+                  <div class="collapse" id="responseForm<?= $counter ?>">
                     <div class="row">
                       <div class="col-12">
                         <form action="#" method="post" class="comment-form border-top border-bottom py-4 mb-2 mt-4">
                           <h3 class="mb-4">
                             <span>ارسال پاسخ به نظر</span>
-                            <span>ادمین</span>
+                            <span><?= $child_comment_item->author_name ?></span>
                           </h3>
 
                           <div class="p-input-group mb-3">
-                            <label for="nameInput" class="mb-2">نام</label>
-                            <input type="text" name="name" class="form-control" id="nameInput" placeholder="نام خود را وارد کنید..." />
+                            <label for="nameInput<?= $counter ?>" class="mb-2">نام</label>
+                            <input type="text" name="name" class="form-control" id="nameInput<?= $counter ?>" placeholder="نام خود را وارد کنید..." />
                           </div>
 
                           <div class="p-input-group mb-3">
-                            <label for="nameInput" class="mb-2">متن پاسخ شما</label>
-                            <textarea name="name" class="form-control" id="nameInput" placeholder="متن پاسخ خود را وارد کنید..." rows="6"></textarea>
+                            <label for="textInput<?= $counter ?>" class="mb-2">متن پاسخ شما</label>
+                            <textarea name="text" class="form-control" id="textInput<?= $counter ?>" placeholder="متن پاسخ خود را وارد کنید..." rows="6"></textarea>
                           </div>
 
                           <button type="submit" class="btn btn-primary">ارسال</button>
 
-                          <input type="hidden" name="commentId" value="1">
+                          <input type="hidden" name="commentId" value="<?= $child_comment_item->id ?>">
                         </form>
                       </div>
                     </div>
@@ -148,282 +201,11 @@
               </div>
             </div>
 
-            <div class="comments-item comments-item-child">
-              <img src="img/profiles/user-profile-default.png" alt="user name" class="img-fluid" />
-
-              <div class="comments-item-content w-100 ms-2">
-                <h5 class="mb-4">احمد کاظمی</h5>
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم</p>
-
-                <div class="responses">
-                  <div class="d-flex mt-3 justify-content-end">
-                    <div class="btn btn-primary ms-auto" data-bs-toggle="collapse" data-bs-target="#responseForm3">پاسخ</div>
-                  </div>
-
-                  <div class="collapse" id="responseForm3">
-                    <div class="row">
-                      <div class="col-12">
-                        <form action="#" method="post" class="comment-form border-top border-bottom py-4 mb-2 mt-4">
-                          <h3 class="mb-4">
-                            <span>ارسال پاسخ به نظر</span>
-                            <span>احمد کاظمی</span>
-                          </h3>
-
-                          <div class="p-input-group mb-3">
-                            <label for="nameInput" class="mb-2">نام</label>
-                            <input type="text" name="name" class="form-control" id="nameInput" placeholder="نام خود را وارد کنید..." />
-                          </div>
-
-                          <div class="p-input-group mb-3">
-                            <label for="nameInput" class="mb-2">متن پاسخ شما</label>
-                            <textarea name="name" class="form-control" id="nameInput" placeholder="متن پاسخ خود را وارد کنید..." rows="6"></textarea>
-                          </div>
-
-                          <button type="submit" class="btn btn-primary">ارسال</button>
-
-                          <input type="hidden" name="commentId" value="1">
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="comments-item">
-              <img src="img/profiles/user-profile-default.png" alt="user name" class="img-fluid" />
-
-              <div class="comments-item-content w-100 ms-2">
-                <h5 class="mb-4">مصطفی محبی</h5>
-                <p>
-                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                  صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها
-                  و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
-                </p>
-
-                <div class="responses">
-                  <div class="d-flex mt-3 justify-content-end">
-                    <div class="btn btn-primary ms-auto" data-bs-toggle="collapse" data-bs-target="#responseForm4">پاسخ</div>
-                  </div>
-
-                  <div class="collapse" id="responseForm4">
-                    <div class="row">
-                      <div class="col-12">
-                        <form action="#" method="post" class="comment-form border-top border-bottom py-4 mb-2 mt-4">
-                          <h3 class="mb-4">
-                            <span>ارسال پاسخ به نظر</span>
-                            <span>مصطفی محبی</span>
-                          </h3>
-
-                          <div class="p-input-group mb-3">
-                            <label for="nameInput" class="mb-2">نام</label>
-                            <input type="text" name="name" class="form-control" id="nameInput" placeholder="نام خود را وارد کنید..." />
-                          </div>
-
-                          <div class="p-input-group mb-3">
-                            <label for="nameInput" class="mb-2">متن پاسخ شما</label>
-                            <textarea name="name" class="form-control" id="nameInput" placeholder="متن پاسخ خود را وارد کنید..." rows="6"></textarea>
-                          </div>
-
-                          <button type="submit" class="btn btn-primary">ارسال</button>
-
-                          <input type="hidden" name="commentId" value="1">
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="comments-item">
-              <img src="img/profiles/user-profile-default.png" alt="user name" class="img-fluid" />
-
-              <div class="comments-item-content w-100 ms-2">
-                <h5 class="mb-4">علی سنایی</h5>
-                <p>
-                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                  صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها
-                  و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
-                  لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و
-                  کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می
-                  باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و
-                  آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا
-                  با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای
-                  علی
-                </p>
-
-                <div class="responses">
-                  <div class="d-flex mt-3 justify-content-end">
-                    <div class="btn btn-primary ms-auto" data-bs-toggle="collapse" data-bs-target="#responseForm5">پاسخ</div>
-                  </div>
-
-                  <div class="collapse" id="responseForm5">
-                    <div class="row">
-                      <div class="col-12">
-                        <form action="#" method="post" class="comment-form border-top border-bottom py-4 mb-2 mt-4">
-                          <h3 class="mb-4">
-                            <span>ارسال پاسخ به نظر</span>
-                            <span>علی سنایی</span>
-                          </h3>
-
-                          <div class="p-input-group mb-3">
-                            <label for="nameInput" class="mb-2">نام</label>
-                            <input type="text" name="name" class="form-control" id="nameInput" placeholder="نام خود را وارد کنید..." />
-                          </div>
-
-                          <div class="p-input-group mb-3">
-                            <label for="nameInput" class="mb-2">متن پاسخ شما</label>
-                            <textarea name="name" class="form-control" id="nameInput" placeholder="متن پاسخ خود را وارد کنید..." rows="6"></textarea>
-                          </div>
-
-                          <button type="submit" class="btn btn-primary">ارسال</button>
-
-                          <input type="hidden" name="commentId" value="1">
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="comments-item comments-item-child">
-              <img src="img/profiles/user-profile-default.png" alt="user name" class="img-fluid" />
-
-              <div class="comments-item-content w-100 ms-2">
-                <h5 class="mb-4">محمد شمس</h5>
-                <p>
-                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                  صنعت چاپ، و با استفاده از
-                </p>
-
-                <div class="responses">
-                  <div class="d-flex mt-3 justify-content-end">
-                    <div class="btn btn-primary ms-auto" data-bs-toggle="collapse" data-bs-target="#responseForm6">پاسخ</div>
-                  </div>
-
-                  <div class="collapse" id="responseForm6">
-                    <div class="row">
-                      <div class="col-12">
-                        <form action="#" method="post" class="comment-form border-top border-bottom py-4 mb-2 mt-4">
-                          <h3 class="mb-4">
-                            <span>ارسال پاسخ به نظر</span>
-                            <span>محمد شمس</span>
-                          </h3>
-
-                          <div class="p-input-group mb-3">
-                            <label for="nameInput" class="mb-2">نام</label>
-                            <input type="text" name="name" class="form-control" id="nameInput" placeholder="نام خود را وارد کنید..." />
-                          </div>
-
-                          <div class="p-input-group mb-3">
-                            <label for="nameInput" class="mb-2">متن پاسخ شما</label>
-                            <textarea name="name" class="form-control" id="nameInput" placeholder="متن پاسخ خود را وارد کنید..." rows="6"></textarea>
-                          </div>
-
-                          <button type="submit" class="btn btn-primary">ارسال</button>
-
-                          <input type="hidden" name="commentId" value="1">
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="comments-item">
-              <img src="img/profiles/user-profile-default.png" alt="user name" class="img-fluid" />
-
-              <div class="comments-item-content w-100 ms-2">
-                <h5 class="mb-4">محمد علیمی</h5>
-                <p>
-                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                  صنعت
-                </p>
-
-                <div class="responses">
-                  <div class="d-flex mt-3 justify-content-end">
-                    <div class="btn btn-primary ms-auto" data-bs-toggle="collapse" data-bs-target="#responseForm7">پاسخ</div>
-                  </div>
-
-                  <div class="collapse" id="responseForm7">
-                    <div class="row">
-                      <div class="col-12">
-                        <form action="#" method="post" class="comment-form border-top border-bottom py-4 mb-2 mt-4">
-                          <h3 class="mb-4">
-                            <span>ارسال پاسخ به نظر</span>
-                            <span>محمد علیمی</span>
-                          </h3>
-
-                          <div class="p-input-group mb-3">
-                            <label for="nameInput" class="mb-2">نام</label>
-                            <input type="text" name="name" class="form-control" id="nameInput" placeholder="نام خود را وارد کنید..." />
-                          </div>
-
-                          <div class="p-input-group mb-3">
-                            <label for="nameInput" class="mb-2">متن پاسخ شما</label>
-                            <textarea name="name" class="form-control" id="nameInput" placeholder="متن پاسخ خود را وارد کنید..." rows="6"></textarea>
-                          </div>
-
-                          <button type="submit" class="btn btn-primary">ارسال</button>
-
-                          <input type="hidden" name="commentId" value="1">
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="comments-item">
-              <img src="img/profiles/user-profile-default.png" alt="user name" class="img-fluid" />
-
-              <div class="comments-item-content w-100 ms-2">
-                <h5 class="mb-4">لیلا احمدی</h5>
-                <p>
-                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                  صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها
-                  و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
-                  لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و
-                </p>
-
-                <div class="responses">
-                  <div class="d-flex mt-3 justify-content-end">
-                    <div class="btn btn-primary ms-auto" data-bs-toggle="collapse" data-bs-target="#responseForm8">پاسخ</div>
-                  </div>
-
-                  <div class="collapse" id="responseForm8">
-                    <div class="row">
-                      <div class="col-12">
-                        <form action="#" method="post" class="comment-form border-top border-bottom py-4 mb-2 mt-4">
-                          <h3 class="mb-4">
-                            <span>ارسال پاسخ به نظر</span>
-                            <span>لیلا احمدی</span>
-                          </h3>
-
-                          <div class="p-input-group mb-3">
-                            <label for="nameInput" class="mb-2">نام</label>
-                            <input type="text" name="name" class="form-control" id="nameInput" placeholder="نام خود را وارد کنید..." />
-                          </div>
-
-                          <div class="p-input-group mb-3">
-                            <label for="nameInput" class="mb-2">متن پاسخ شما</label>
-                            <textarea name="name" class="form-control" id="nameInput" placeholder="متن پاسخ خود را وارد کنید..." rows="6"></textarea>
-                          </div>
-
-                          <button type="submit" class="btn btn-primary">ارسال</button>
-
-                          <input type="hidden" name="commentId" value="1">
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <?php
+          /* end first foreach */ }
+          /* end last foreach */ }
+          ?>
+          
           </div>
         </div>
       </div>

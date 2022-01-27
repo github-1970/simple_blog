@@ -24,7 +24,7 @@
       <div
         class="container py-2 d-flex justify-content-between flex-row-reverse">
         <a class="navbar-brand"
-          href="#"><span
+          href="/public"><span
             class="text-primary">RasoolBlog</span><span>.ir</span>
         </a>
         <button class="navbar-toggler"
@@ -59,7 +59,7 @@
               ?>
                 <li>
                   <a class="dropdown-item"
-                    href="category.php?id=<?= $category->id ?>"><?= $category->title ?></a>
+                    href="category.php?category_id=<?= $category->id ?>"><?= $category->title ?></a>
                 </li>
               <?php } ?>
               </ul>
@@ -68,14 +68,14 @@
 
           <ul class="navbar-nav ms-auto me-0 me-md-4">
             <li class="nav-item">
-              <a href="#" class="nav-link d-flex align-items-center justify-content-center">
+              <a href="/public/login.php" class="nav-link d-flex align-items-center justify-content-center">
                 <span class="me-2">ورود</span>
                 <i class="fas fa-user fa-lg"></i>
               </a>
             </li>
 
             <li class="nav-item signup">
-              <a href="#" class="nav-link d-flex align-items-center justify-content-center">
+              <a href="/public/register.php" class="nav-link d-flex align-items-center justify-content-center">
                 <span class="me-2">ثبت نام</span>
                 <i class="fas fa-user-plus fa-lg"></i>
               </a>
