@@ -11107,6 +11107,10 @@ textarea.form-control-lg {
   font-family: "Vazir", Arial, Helvetica, sans-serif;
 }
 
+body {
+  min-height: 100vh;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -11127,11 +11131,11 @@ p {
   width: 0%;
 }
 
-.signup {
+.border-right {
   border-right: 1px solid whitesmoke;
 }
 @media screen and (max-width: 768px) {
-  .signup {
+  .border-right {
     border-right: none;
   }
 }
@@ -11236,6 +11240,61 @@ footer .footer {
 }
 footer .footer-location {
   height: 150px;
+}
+
+.register-container {
+  margin-top: 3.5rem;
+}
+.register-container .form-container .img-register {
+  background: url("/public/img/auth/bg-register.jpg") no-repeat center center/cover;
+}
+.register-container .form-container .form-control::placeholder {
+  text-align: right;
+}
+.register-container .form-container input, .register-container .form-container .btn {
+  border-radius: 30rem;
+}
+.register-container .form-container .btn-facebook {
+  background: #3b5998;
+  color: white;
+}
+.register-container .form-container footer a {
+  color: #029ffa;
+  font-size: 0.9rem;
+}
+.register-container .form-container footer a:hover {
+  text-decoration: underline;
+  color: #7f97d9;
+}
+
+.login-container {
+  margin-top: 3.5rem;
+}
+.login-container .form-container .img-login {
+  background: url("/public/img/auth/bg-login.jpg") no-repeat center center/cover;
+}
+.login-container .form-container .form-control::placeholder {
+  text-align: right;
+}
+.login-container .form-container input, .login-container .form-container .btn {
+  border-radius: 30rem;
+}
+.login-container .form-container .btn-facebook {
+  background: #3b5998;
+  color: white;
+}
+.login-container .form-container footer a {
+  color: #029ffa;
+  font-size: 0.9rem;
+}
+.login-container .form-container footer a:hover {
+  text-decoration: underline;
+  color: #7f97d9;
+}
+@media screen and (min-width: 1080px) {
+  .login-container .form-container {
+    width: 70% !important;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */

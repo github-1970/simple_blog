@@ -1,34 +1,50 @@
+<?php
+$post_id_in_url = isset($_GET['id']) && $_GET['id'] && $_GET['id'] > 0 ? (int)$_GET['id'] : 1;
+$post_not_found = false;
+
+try{
+  $stmt = $conn->prepare("SELECT p.*, c.title AS category_title, u.name AS author_name FROM posts p INNER JOIN categories c ON p.category_id = c.id INNER JOIN users u ON p.author_id = u.id where p.id = :id");
+  $stmt->execute([':id' => $post_id_in_url]);
+  $post = $stmt->fetch(PDO::FETCH_OBJ);
+
+  if(!$post){
+    throw new PDOException('پست مورد نظر شما یافت نشد!');
+  }
+}
+catch(PDOException $e){
+  $post_not_found = true;
+  $post_not_found_message = '
+  <div class="alert alert-danger">' . 
+    '<h4 class="mb-3">' . $e->getMessage() . '</h4>' .
+    '<span>از طریق این لینک به صفحه اصلی بروید: </span>' .
+    '<a class="text-primary" href="' . url() .'/public">صفحه اصلی</a>' .
+  '</div>';
+  
+  $script = '
+  <script defer>
+  document.querySelector("aside").style.marginTop = "2.5rem"
+  </script>
+  ';
+}
+
+?>
+
 <div class="col-12 col-md-8">
-  <main class="main " id="psotMain">
+
+  <?php if(!$post_not_found){ ?>
+
+  <main class="main" id="psotMain">
     <!-- show post -->
     <div class="row">
       <div class="col-12">
         <div class="card">
-          <?php
-          $post_id_in_url = isset($_GET['id']) && $_GET['id'] && $_GET['id'] > 0 ? (int)$_GET['id'] : 1;
-
-          try{
-            $stmt = $conn->prepare("SELECT p.*, c.title AS category_title, u.name AS author_name FROM posts p INNER JOIN categories c ON p.category_id = c.id INNER JOIN users u ON p.author_id = u.id where p.id = :id");
-            $stmt->execute([':id' => $post_id_in_url]);
-            $post = $stmt->fetch(PDO::FETCH_OBJ);
-
-            if(!$post){
-              throw new PDOException();
-            }
-          }
-          catch(PDOException $e){
-            die('post not found');
-          }
-          
-          ?>
-
           <img src="img/<?= $post->image ?>" class="card-img-top" alt="<?= $post->title ?>">
 
           <div class="card-body">
             <div class="card-title d-flex align-items-center justify-content-between mt-3 mb-4">
               <h1><?= $post->title ?></h1>
 
-              <a href="category.php?category_id=<?= $post->id ?>">
+              <a href="<?= url() ?>/public/category.php?category_id=<?= $post->category_id ?>">
                 <span class="badge bg-secondary"><?= $post->category_title ?></span>
               </a>
             </div>
@@ -211,4 +227,16 @@
       </div>
     </div>
   </main>
+  
+  <?php } else{ ?>
+
+  <div class="main" id="psotMain">
+    <?= $post_not_found_message ?>
+  </div>
+
+  <?php
+    echo $script;
+    }
+  ?>
+
 </div>

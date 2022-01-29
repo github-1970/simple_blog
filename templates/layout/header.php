@@ -1,3 +1,7 @@
+<?php
+sessionStart();
+?>
+
 <!DOCTYPE html>
 <html lang="en"
   dir="rtl">
@@ -8,12 +12,12 @@
     content="IE=edge">
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0">
-  <title>Simple Blog</title>
+  <title><?= $title ?></title>
   <link rel="stylesheet"
-    href="css/styles.css">
+    href="<?= url() ?>/public/css/styles.css">
   <script defer
     type="module"
-    src="js/index.js"></script>
+    src="<?= url() ?>/public/js/index.js"></script>
 </head>
 
 <body class="position-relative">
@@ -24,7 +28,7 @@
       <div
         class="container py-2 d-flex justify-content-between flex-row-reverse">
         <a class="navbar-brand"
-          href="/public"><span
+          href="<?= url() ?>/public"><span
             class="text-primary">RasoolBlog</span><span>.ir</span>
         </a>
         <button class="navbar-toggler"
@@ -67,23 +71,31 @@
           </ul>
 
           <ul class="navbar-nav ms-auto me-0 me-md-4">
-            <li class="nav-item">
-              <a href="/public/login.php" class="nav-link d-flex align-items-center justify-content-center">
+            <li class="nav-item mb-1 <?= checkUserLoggedIn() ? 'd-none' : '' ?>">
+              <a href="<?= url() ?>/public/auth/login.php" class="nav-link d-flex align-items-center justify-content-center">
                 <span class="me-2">ورود</span>
                 <i class="fas fa-user fa-lg"></i>
               </a>
             </li>
 
-            <li class="nav-item signup">
-              <a href="/public/register.php" class="nav-link d-flex align-items-center justify-content-center">
+            <li class="nav-item border-right mb-1 <?= checkUserLoggedIn() ? 'd-none' : '' ?>">
+              <a href="<?= url() ?>/public/auth/register.php" class="nav-link d-flex align-items-center justify-content-center">
                 <span class="me-2">ثبت نام</span>
                 <i class="fas fa-user-plus fa-lg"></i>
               </a>
             </li>
 
+            <!-- user -->
+            <li class="nav-item mb-1 <?= !checkUserLoggedIn() ? 'd-none' : '' ?>">
+              <a href="<?= url() ?>/public/admin" class="nav-link d-flex align-items-center justify-content-center">
+                <span class="me-2"><?= isset($_SESSION['user']['login']['name']) && $_SESSION['user']['login']['name'] ? $_SESSION['user']['login']['name'] : 'حساب کاربری' ?></span>
+                <i class="fas fa-user-cog fa-lg"></i>
+              </a>
+            </li>
+
             <!-- for sign out, when logged in -->
-            <li class="nav-item d-none">
-              <a href="#" class="nav-link d-flex align-items-center">
+            <li class="nav-item border-right mb-1 <?= !checkUserLoggedIn() ? 'd-none' : '' ?>">
+              <a href="<?= url() ?>/public/auth/logout.php" class="nav-link d-flex align-items-center justify-content-center">
                 <span class="me-2">خروج</span>
                 <i class="fas fa-sign-out-alt fa-lg"></i>
               </a>

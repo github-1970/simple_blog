@@ -1,6 +1,14 @@
-<!-- home page main -->
+<!-- search page main -->
 <div class="col-12 col-md-8">
+  <?php if(!$post_not_found){ ?>
+
   <main class="main" id="homeMain">
+
+  <div class="alert alert-info mb-5">
+    <span class="h5 mb-3">نتایج جستجو برای عبارت: </span>
+    <span class="h4"><?= $search ?></span>
+  </div>
+
     <div class="row">
 
     <?php
@@ -39,7 +47,18 @@
           </div>
         </div>
       </div>
+    
     <?php } ?>
+
     </div>
   </main>
+
+  <?php } else{ ?>
+
+  <div class="main" id="homeMain">
+    <?= $post_not_found_message ?>
+  </div>
+
+  <?php } ?>
+
 </div>

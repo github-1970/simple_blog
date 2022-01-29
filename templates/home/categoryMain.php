@@ -1,5 +1,8 @@
-<!-- home page main -->
+<!-- category page main -->
 <div class="col-12 col-md-8">
+
+  <?php if(!$post_not_found){ ?>
+
   <main class="main" id="homeMain">
     <div class="row">
 
@@ -42,4 +45,13 @@
     <?php } ?>
     </div>
   </main>
+
+  <?php } else{ ?>
+
+  <div class="main" id="homeMain">
+    <?= $post_not_found_message ?>
+  </div>
+
+  <?php } ?>
+
 </div>

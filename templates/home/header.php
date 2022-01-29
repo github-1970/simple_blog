@@ -1,6 +1,6 @@
 <?php
-  $posts = $conn->query("SELECT s.active, p.* FROM `posts_slider` s INNER JOIN `posts` p ON s.post_id = p.id ORDER BY s.active DESC;");
-  $posts = $posts->fetchAll(PDO::FETCH_OBJ);
+  $header_posts = $conn->query("SELECT s.active, p.* FROM `posts_slider` s INNER JOIN `posts` p ON s.post_id = p.id ORDER BY s.active DESC, COALESCE(p.updated_at, p.created_at) DESC;");
+  $header_posts = $header_posts->fetchAll(PDO::FETCH_OBJ);
   $counter = 0;
 ?>
 
@@ -8,13 +8,13 @@
 <header id="header">
   <div id="carousel" class="carousel carousel-light slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
-    <?php foreach ($posts as $post){ ?>
+    <?php foreach ($header_posts as $post){ ?>
       <button data-bs-target="#carousel" data-bs-slide-to="<?= $counter++ ?>" class="<?= $post->active ? 'active' : ''; ?>"></button>
     <?php } ?>
     </div>
 
     <div class="carousel-inner">
-    <?php foreach ($posts as $post){ ?>
+    <?php foreach ($header_posts as $post){ ?>
       <div class="carousel-item <?= $post->active ? 'active' : ''; ?>">
         <img src="img/<?= $post->image ?>" class="d-block w-100" alt="<?= $post->title ?>">
         <div class="carousel-caption">
