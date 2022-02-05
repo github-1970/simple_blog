@@ -20,8 +20,7 @@ sessionStart();
     src="<?= url() ?>/public/js/index.js"></script>
 </head>
 
-<body class="position-relative">
-
+<body class="position-relative bg-light">
   <!-- navbar -->
   <div class="navbar-container fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -42,7 +41,7 @@ sessionStart();
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center mt-3 mt-md-0">
             <li class="nav-item">
               <a class="nav-link active"
-                href="#">خانه</a>
+                href="<?= url() ?>/public/">خانه</a>
             </li>
 
             <li
@@ -56,7 +55,7 @@ sessionStart();
               <?php 
               require_once $_SERVER['DOCUMENT_ROOT'] . '/modules/database/dbConnection.php';
 
-              $categories = $conn->query("SELECT * FROM categories");
+              $categories = $conn->query("SELECT c.*, count(c.id) AS posts_count FROM categories c INNER JOIN posts p on c.id = p.category_id GROUP BY c.id;");
               $categories = $categories->fetchAll(PDO::FETCH_OBJ);
 
               foreach($categories as $category){
@@ -87,8 +86,10 @@ sessionStart();
 
             <!-- user -->
             <li class="nav-item mb-1 <?= !checkUserLoggedIn() ? 'd-none' : '' ?>">
-              <a href="<?= url() ?>/public/admin" class="nav-link d-flex align-items-center justify-content-center">
-                <span class="me-2"><?= isset($_SESSION['user']['login']['name']) && $_SESSION['user']['login']['name'] ? $_SESSION['user']['login']['name'] : 'حساب کاربری' ?></span>
+              <a href="<?= url() ?>/public/admin/dashboard" class="nav-link d-flex align-items-center justify-content-center">
+                <span class="me-2">
+                  <?= isset($_SESSION['user']['login']['name']) && $_SESSION['user']['login']['name'] ? $_SESSION['user']['login']['name'] : 'حساب کاربری' ?>
+                </span>
                 <i class="fas fa-user-cog fa-lg"></i>
               </a>
             </li>

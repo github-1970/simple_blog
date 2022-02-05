@@ -13,7 +13,7 @@
       <div class="col-12 col-md-6">
         <div class="card">
           <a href="post.php?id=<?=$post->id?>">
-            <img src="img/<?=$post->image?>" class="card-img-top" alt="<?=$post->title?>">
+            <img src="img/posts/<?=$post->image?>" class="card-img-top" alt="<?=$post->title?>">
           </a>
 
           <div class="card-body">
@@ -28,7 +28,7 @@
             </div>
 
             <p class="card-text my-3">
-              <?=textWrapper($post->text)?>
+              <?=textWrapper(html_entity_decode($post->text))?>
             </p>
 
             <div class="d-flex align-items-center justify-content-between">

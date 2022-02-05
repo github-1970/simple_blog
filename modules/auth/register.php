@@ -14,7 +14,8 @@ try
   isset($_SESSION['error']) ? call_user_func(function(){unset($_SESSION['error']);} ) : "";
 
   foreach ($require_fields as $field) {
-    ${$field} = checkError($field, $_POST[$field], $field, 'register');
+    $field_value = isset($_POST[$field]) && $_POST[$field] ? $_POST[$field] : '';
+    ${$field} = checkError($field, $field_value, $field, 'login');
 
     ${$field} ? '' : throwException("App has Error");
   }

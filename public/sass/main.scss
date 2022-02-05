@@ -1,11 +1,19 @@
 @import 'vendor/bootstrap.rtl.min';
 @import 'fonts/font-face';
+@import 'abstracts/mixin';
 @import 'base';
 @import 'general';
+
+// components
+@import 'components';
 
 @import 'partials/header';
 @import 'partials/main-container';
 @import 'partials/footer';
 
-@import 'partials/register';
+// auth
 @import 'partials/login';
+@import 'partials/register';
+
+// admin
+@import 'partials/admin';

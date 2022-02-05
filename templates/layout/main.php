@@ -1,13 +1,7 @@
 <?php
 // destroy session error in start
 // use "if" and "isset" for prevent undefined variable error
-if( isset($_SESSION['error']) ){
-  $_SESSION['new_error'] = $_SESSION['error'];
-  $_SESSION['error'] = '';
-}
-else{
-  $_SESSION['new_error'] = '';
-}
+prepareReceiveError();
 
 if( isset($_SESSION['subscribe']['message']) ){
   $_SESSION['subscribe']['new_message'] = $_SESSION['subscribe']['message'];

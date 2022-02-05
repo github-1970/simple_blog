@@ -1,32 +1,5 @@
 <?php
-$post_id_in_url = isset($_GET['id']) && $_GET['id'] && $_GET['id'] > 0 ? (int)$_GET['id'] : 1;
-$post_not_found = false;
-
-try{
-  $stmt = $conn->prepare("SELECT p.*, c.title AS category_title, u.name AS author_name FROM posts p INNER JOIN categories c ON p.category_id = c.id INNER JOIN users u ON p.author_id = u.id where p.id = :id");
-  $stmt->execute([':id' => $post_id_in_url]);
-  $post = $stmt->fetch(PDO::FETCH_OBJ);
-
-  if(!$post){
-    throw new PDOException('پست مورد نظر شما یافت نشد!');
-  }
-}
-catch(PDOException $e){
-  $post_not_found = true;
-  $post_not_found_message = '
-  <div class="alert alert-danger">' . 
-    '<h4 class="mb-3">' . $e->getMessage() . '</h4>' .
-    '<span>از طریق این لینک به صفحه اصلی بروید: </span>' .
-    '<a class="text-primary" href="' . url() .'/public">صفحه اصلی</a>' .
-  '</div>';
-  
-  $script = '
-  <script defer>
-  document.querySelector("aside").style.marginTop = "2.5rem"
-  </script>
-  ';
-}
-
+prepareReceiveError();
 ?>
 
 <div class="col-12 col-md-8">
@@ -36,12 +9,12 @@ catch(PDOException $e){
   <main class="main" id="psotMain">
     <!-- show post -->
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 mb-3">
         <div class="card">
-          <img src="img/<?= $post->image ?>" class="card-img-top" alt="<?= $post->title ?>">
+          <img src="img/posts/<?= $post->image ?>" class="card-img-top" alt="<?= $post->title ?>">
 
           <div class="card-body">
-            <div class="card-title d-flex align-items-center justify-content-between mt-3 mb-4">
+            <div class="card-title d-flex align-items-center justify-content-between my-3">
               <h1><?= $post->title ?></h1>
 
               <a href="<?= url() ?>/public/category.php?category_id=<?= $post->category_id ?>">
@@ -50,7 +23,7 @@ catch(PDOException $e){
             </div>
 
             <p class="card-text my-3">
-              <?= $post->text ?>
+              <?= html_entity_decode($post->text) ?>
             </p>
 
             <div class="d-flex align-items-center mb-3 mt-4">
@@ -67,17 +40,20 @@ catch(PDOException $e){
     <!-- send comment -->
     <div class="row">
       <div class="col-12">
-        <form action="#" method="post" class="comment-form border-top border-bottom py-4 my-2">
+        <form action="<?= url() ?>/modules/libs/insertComment.php?post_id=<?= $post->id ?>" method="post" class="comment-form border-top border-bottom py-4 my-2">
           <h3 class="mb-4">ارسال نظر در رابطه با مقاله</h3>
 
-          <div class="p-input-group mb-3">
+          <!-- <div class="p-input-group mb-3">
             <label for="nameInput" class="mb-2">نام</label>
             <input type="text" name="name" class="form-control" id="nameInput" placeholder="نام خود را وارد کنید...">
-          </div>
+          </div> -->
 
           <div class="p-input-group mb-3">
-            <label for="nameInput" class="mb-2">متن نظر شما</label>
-            <textarea name="name" class="form-control" id="nameInput" placeholder="متن نظر خود را وارد کنید..." rows="6"></textarea>
+            <label for="textInput" class="mb-2">متن نظر شما</label>
+            <textarea name="text" class="form-control" id="textInput" placeholder="متن نظر خود را وارد کنید..." rows="6"></textarea>
+
+            <?= displayError('text') ?>
+
           </div>
 
           <button type="submit" class="btn btn-primary">ارسال</button>
@@ -89,21 +65,6 @@ catch(PDOException $e){
     <div class="row">
       <div class="col-12">
         <div class="comments-container mt-4">
-
-          <?php
-          $comments = $conn->query("SELECT c.*, u.name as author_name FROM comments c INNER JOIN users u ON c.author_id = u.id where post_id={$post->id}");
-
-          $comments = $comments->fetchALl(PDO::FETCH_OBJ);
-
-          // split parent and child comments
-          $parent_comments = array_filter($comments, function($_comment){
-            return $_comment->parent_id == null;
-          });
-          $child_comments = array_filter($comments, function($_comment){
-            return $_comment->parent_id != null;
-          });
-          ?>
-
           <h3 class="mb-3">نظرهای کاربران</h3>
           <span class="">تعداد نظرها: </span>
           <span class="h5 fw-bold"><?= count($comments) ?></span>

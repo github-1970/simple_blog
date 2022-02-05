@@ -16,13 +16,13 @@
     <div class="carousel-inner">
     <?php foreach ($header_posts as $post){ ?>
       <div class="carousel-item <?= $post->active ? 'active' : ''; ?>">
-        <img src="img/<?= $post->image ?>" class="d-block w-100" alt="<?= $post->title ?>">
+        <img src="img/posts/<?= $post->image ?>" class="d-block w-100" alt="<?= $post->title ?>">
         <div class="carousel-caption">
           <h2>
             <a href="post.php?id=<?= $post->id ?>"><?= $post->title ?></a>
           </h2>
           <p class="my-3">
-            <?= textWrapper($post->text, 150) ?>
+            <?= textWrapper(html_entity_decode($post->text), 150) ?>
           </p>
           <a href="post.php?id=<?= $post->id ?>" class="btn btn-primary">مشاهده</a>
         </div>

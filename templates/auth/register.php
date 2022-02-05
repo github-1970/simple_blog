@@ -2,11 +2,6 @@
 
 sessionStart();
 
-// check user is login
-if(checkUserLoggedIn()){
-  redirect(url() . '/public');
-}
-
 // destroy session error in start
 // use "if" and "isset" for prevent undefined variable error
 if( isset($_SESSION['error']) ){

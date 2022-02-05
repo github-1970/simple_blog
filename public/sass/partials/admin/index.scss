@@ -1,0 +1,74 @@
+header{
+  .navbar{
+    background: rgba(rgb(0, 0, 0), .8) !important;
+
+    .admin-name:hover{
+      color: rgba(255, 255, 255, 0.55) !important;
+    }
+  }
+}
+
+.wrapper{
+  display: grid;
+  grid-template-columns: auto 1fr;
+  
+  aside{
+    min-height: 100vh;
+    & > .sticky-top{
+      top: 3.7rem;
+    }
+
+    .aside-container{
+      width: 20rem;
+      overflow-x: hidden;
+      transition: all .5s linear;
+      .aside-dialog{
+        width: 20rem;
+
+        .aside-item{
+          display: grid;
+          grid-template-columns: auto 1fr;
+          padding: .5rem .3rem;
+          transition: background .4s;
+          &:hover{
+            background: rgb(206, 204, 204);
+          }
+          &.active{
+            background: rgb(122, 121, 121);
+            color: white;
+            &:hover{
+              background: rgb(206, 204, 204);
+              color: black;
+            }
+          }
+    
+          .aside-content{
+            display: flex;
+            align-items: center;
+            padding: 0 .5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper{
+    display: block;
+  
+    aside{
+      position: fixed;
+      height: 100vh;
+      z-index: 1000;
+      > .sticky-top{
+        position: static !important;
+        top: 0;
+      }
+
+      .aside-container{
+        width: 2.5rem;
+      }
+    }
+  }
+}

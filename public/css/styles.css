@@ -11105,6 +11105,7 @@ textarea.form-control-lg {
   margin: 0;
   box-sizing: border-box;
   font-family: "Vazir", Arial, Helvetica, sans-serif;
+  max-width: 100vw;
 }
 
 body {
@@ -11124,11 +11125,84 @@ p {
   margin: 0;
 }
 
+.row {
+  margin: 0 !important;
+}
+
+td, th {
+  vertical-align: middle;
+  text-align: center;
+}
+
 /* The progress bar (scroll indicator) */
 .p-progress-bar {
-  height: 8px;
+  height: 7px;
   background: var(--bs-info);
   width: 0%;
+}
+
+.btn-outline-info:hover {
+  color: white;
+}
+
+.ck-editor, .ck-editor * {
+  font-family: "Vazir", Arial, Helvetica, sans-serif !important;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 35px;
+  height: 21px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  right: 2px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: black;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(-15px);
+  -ms-transform: translateX(-15px);
+  transform: translateX(-15px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
 
 .border-right {
@@ -11242,31 +11316,6 @@ footer .footer-location {
   height: 150px;
 }
 
-.register-container {
-  margin-top: 3.5rem;
-}
-.register-container .form-container .img-register {
-  background: url("/public/img/auth/bg-register.jpg") no-repeat center center/cover;
-}
-.register-container .form-container .form-control::placeholder {
-  text-align: right;
-}
-.register-container .form-container input, .register-container .form-container .btn {
-  border-radius: 30rem;
-}
-.register-container .form-container .btn-facebook {
-  background: #3b5998;
-  color: white;
-}
-.register-container .form-container footer a {
-  color: #029ffa;
-  font-size: 0.9rem;
-}
-.register-container .form-container footer a:hover {
-  text-decoration: underline;
-  color: #7f97d9;
-}
-
 .login-container {
   margin-top: 3.5rem;
 }
@@ -11294,6 +11343,97 @@ footer .footer-location {
 @media screen and (min-width: 1080px) {
   .login-container .form-container {
     width: 70% !important;
+  }
+}
+
+.register-container {
+  margin-top: 3.5rem;
+}
+.register-container .form-container .img-register {
+  background: url("/public/img/auth/bg-register.jpg") no-repeat center center/cover;
+}
+.register-container .form-container .form-control::placeholder {
+  text-align: right;
+}
+.register-container .form-container input, .register-container .form-container .btn {
+  border-radius: 30rem;
+}
+.register-container .form-container .btn-facebook {
+  background: #3b5998;
+  color: white;
+}
+.register-container .form-container footer a {
+  color: #029ffa;
+  font-size: 0.9rem;
+}
+.register-container .form-container footer a:hover {
+  text-decoration: underline;
+  color: #7f97d9;
+}
+
+header .navbar {
+  background: rgba(0, 0, 0, 0.8) !important;
+}
+header .navbar .admin-name:hover {
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+.wrapper aside {
+  min-height: 100vh;
+}
+.wrapper aside > .sticky-top {
+  top: 3.7rem;
+}
+.wrapper aside .aside-container {
+  width: 20rem;
+  overflow-x: hidden;
+  transition: all 0.5s linear;
+}
+.wrapper aside .aside-container .aside-dialog {
+  width: 20rem;
+}
+.wrapper aside .aside-container .aside-dialog .aside-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  padding: 0.5rem 0.3rem;
+  transition: background 0.4s;
+}
+.wrapper aside .aside-container .aside-dialog .aside-item:hover {
+  background: #cecccc;
+}
+.wrapper aside .aside-container .aside-dialog .aside-item.active {
+  background: #7a7979;
+  color: white;
+}
+.wrapper aside .aside-container .aside-dialog .aside-item.active:hover {
+  background: #cecccc;
+  color: black;
+}
+.wrapper aside .aside-container .aside-dialog .aside-item .aside-content {
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    display: block;
+  }
+  .wrapper aside {
+    position: fixed;
+    height: 100vh;
+    z-index: 1000;
+  }
+  .wrapper aside > .sticky-top {
+    position: static !important;
+    top: 0;
+  }
+  .wrapper aside .aside-container {
+    width: 2.5rem;
   }
 }
 

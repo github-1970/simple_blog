@@ -41,13 +41,12 @@ function isEmail($email){
   return filter_var($email, FILTER_VALIDATE_EMAIL) ? true : throwException("فرمت ایمیل وارد شده غلط می باشد");
 }
 
-function setErrorInSession($name, $message){
-  $_SESSION['error'][$name] = $message;
+function clearErrorInSession($name){
+  if(isset($_SESSION['error']) && isset($_SESSION['error'][$name])){
+    unset($_SESSION['error'][$name]);
+  }
 }
 
-function clearErrorInSession($name){
-  unset($_SESSION['error'][$name]);
-}
 function setSessionForSubscribe($message=true, $name='subscribe'){
   $_SESSION[$name]['message'] = $message;
 }
