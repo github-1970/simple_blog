@@ -19,8 +19,7 @@ try{
   }
 
   // get comments
-  $comments = $conn->query("SELECT c.*, u.name as author_name FROM comments c INNER JOIN users u ON c.author_id = u.id where c.status = 1 && c.post_id = {$post->id} ORDER BY c.id DESC");
-
+  $comments = $conn->query("SELECT c.*, u.name as author_name, u.role AS author_role FROM comments c INNER JOIN users u ON c.author_id = u.id where c.status = 1 && c.post_id = {$post->id} ORDER BY c.id DESC");
   $comments = $comments->fetchALl(PDO::FETCH_OBJ);
 
   // split parent and child comments

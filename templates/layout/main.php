@@ -130,7 +130,7 @@ else{
                 />
 
                 <input class="border-0" type="text"  style="width: 0; height: 0;"
-                <?= hasError() ? 'autofocus' : '' ?>
+                <?= hasError('email') || hasError('name') ? 'autofocus' : '' ?>
                 >
               </form>
               

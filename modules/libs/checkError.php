@@ -8,9 +8,10 @@ sessionStart();
 function checkError($name, $value, $type='text', $belongsTo='global'){
   try{
     $value = trim($value, ' \'\"\\\/');
+    $value = preg_replace('/^[\r\n]+|[\r\n]+$/', '', $value);
 
     notEmptyField($value);
-    
+
     if($type == 'email'){
       isEmail($value);
     }

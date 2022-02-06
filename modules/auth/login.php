@@ -37,7 +37,7 @@ try
     $_SESSION['user']['login']['remember'] = false;
   }
 
-  setSessionForUserIsLogin($user->name, $user->id);
+  setSessionForUserIsLogin($user->name, $user->id, $user->role);
   isset($_SESSION['error']) ? call_user_func(function(){ $_SESSION['error'] = ""; } ) : "";
   $target_url = isset($_SESSION['auth']['target_url']) ? $_SESSION['auth']['target_url'] : '/public';
   redirect($target_url);
@@ -74,8 +74,9 @@ function checkLogin($email, $password){
   }
 }
 
-function setSessionForUserIsLogin($name, $id){
+function setSessionForUserIsLogin($name, $id, $role){
   $_SESSION['user']['login']['status'] = true;
   $_SESSION['user']['login']['name'] = $name;
   $_SESSION['user']['login']['id'] = $id;
+  $_SESSION['user']['login']['role'] = $role;
 }

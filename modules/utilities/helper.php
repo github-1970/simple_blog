@@ -1,11 +1,13 @@
 <?php
 
+// header('Content-type: text/html; charset=utf-8');
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/configs/constants.php';
 
 sessionStart();
 
 function textWrapper($text, $count=300){
-  return strlen($text) - 3 > $count ? mb_substr($text, 0, $count, 'utf-8') . ' ...' : $text;
+  return (mb_strlen($text, 'utf-8') - 3) > $count ? mb_substr($text, 0, $count, 'utf-8') . ' ...' : $text;
 }
 
 function url(){
@@ -50,11 +52,19 @@ function prepareReceiveError(){
   }
 }
 
-function hasError(){
+function hasError($name='') {
+  if( $name && isset($_SESSION['new_error']) && is_array($_SESSION['new_error']) && isset($_SESSION['new_error'][$name]) ){
+    return $_SESSION['new_error'][$name] ? $_SESSION['new_error'][$name] : false;
+  }
+
+  if($name && !isset($_SESSION['new_error'][$name])){
+    return false;
+  }
+
   if( isset($_SESSION['new_error']) && is_array($_SESSION['new_error']) ){
     return (count($_SESSION['new_error']) > 0);
   }
-  return '';
+  return false;
 }
 
 function subscribeIsSuccuss($name='subscribe'){

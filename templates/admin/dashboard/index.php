@@ -119,7 +119,7 @@ prepareReceiveError();
           <th><?= $counter++ ?></th>
           <td><?= $category->title ?></td>
           <td>
-          <a href="<?= url() ?>/public/admin/categories/operations.php?type=edit&id=<?= $category->id ?>" class="btn btn-outline-info mb-2 mb-md-0">ویرایش</a>
+            <a href="<?= url() ?>/public/admin/categories/operations.php?type=edit&id=<?= $category->id ?>" class="btn btn-outline-info mb-2 mb-md-0 d-block d-md-inline-block">ویرایش</a>
 
             <a href="<?= url() ?>/public/admin/categories/index.php?delete=true&id=<?= $category->id ?>" class="btn btn-outline-danger">حدف</a>
           </td>
