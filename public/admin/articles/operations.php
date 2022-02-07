@@ -4,7 +4,7 @@ require_once MODULES . '/database/dbConnection.php';
 require_once MODULES . '/database/insertData.php';
 require_once MODULES . '/utilities/helper.php';
 require_once MODULES . '/libs/checkError.php';
-include_once MODULES . '/libs/imageUpload.php';
+include_once MODULES . '/libs/ImageUpload.php';
 
 setReferer($_SERVER['HTTP_REFERER']);
 $active_category = ['articles' => true];

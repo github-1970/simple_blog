@@ -1,5 +1,7 @@
 <?php
 
+use Modules\Libs\ImageUpload;
+
 try{
   $action = isset($_GET['action']) ? $_GET['action'] : '';
   $action_id = isset($_GET['id']) ? $_GET['id'] : '';
@@ -20,8 +22,12 @@ try{
     $query = 'UPDATE posts SET title = ?, author_id = ?, category_id = ?, text = ? WHERE id = ?;';
     $values = [ $title, $author, $category, $text, $action_id ];
 
-    if(checkRequestHasFile('image')){
-      $image_path_array = imageUpload();
+    $imageUpload = new ImageUpload();
+
+    // if(checkRequestHasFile('image')){
+    //   $image_path_array = imageUpload();
+    if( $imageUpload->checkRequestHasFile('image') ){
+      $image_path_array = $imageUpload->run();
 
       $image_path_array ? '' : throwException("Error");
 
@@ -45,7 +51,11 @@ try{
       ${$field} ? '' : throwException("Error");
     }
 
-    $image_path_array = imageUpload();
+    // $image_path_array = imageUpload();
+    $imageUpload = new ImageUpload();
+    $image_path_array = $imageUpload->run();
+
+    // die('action');
 
     $image_path_array ? '' : throwException("Error");
 
