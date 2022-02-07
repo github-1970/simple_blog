@@ -1,2 +1,9 @@
 *.css text diff=css linguist-detectable=false
 *.scss text diff=css linguist-detectable=false
+
+52.90%  HTML
+42.84%  JavaScript
+2.87%   Perl
+0.62%   CSS
+0.41%   Perl 6
+0.35%   Shell
