@@ -1,2 +1,2 @@
-*.css text
-*.scss text
+*.css text diff=css
+*.scss text diff=css
