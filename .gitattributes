@@ -1,2 +1,2 @@
-*.css text diff=css
-*.scss text diff=css
+*.css text diff=css linguist-detectable=false
+*.scss text diff=css linguist-detectable=false
