@@ -1,25 +1,10 @@
 <?php
 
-namespace Modules\Libs;
+namespace Modules\Libs\ImageUpload;
 
-use Exception;
-
-require_once $_SERVER['DOCUMENT_ROOT'] . '/configs/constants.php';
-require_once MODULES . '/utilities/helper.php';
-
-class ImageUpload
-{
-  public function __construct( $name = 'image', $image_dir = (PUBLIC_DIR . '/img/posts/') )
-  {
-    $this->name = $name;
-    $this->image_dir = $image_dir;
-
-    sessionStart();
-  }
-
-  public function run($image_dir = (PUBLIC_DIR . '/img/posts/') ){
-    try {
-      $this->checkRequestHasFile($this->name) ? '' : throwException('این فیلد نمی تواند خالی باشد!');
+trait ImageTraits{
+  public function imageValidation(){
+    self::checkRequestHasFile($this->name) ? '' : throwException('این فیلد نمی تواند خالی باشد!');
 
       $this->checkFileIsImage($this->name) ? '' : throwException('این فایل یک تصویر نمی باشد! لطفا یک تصویر انتخاب کنید و دوباره تلاش کنید.');
 
@@ -29,24 +14,13 @@ class ImageUpload
       jpg, jpeg, png, gif, webp
       یک تصویر را ارسال نمایید.');
 
-      $image_path_array = $this->createFileName($this->name, $image_dir, $image_file_type);
-      $image_full_path = $image_path_array['image_full_path'];
-      // $image_name = $image_path_array['image_name'];
-
-      if (move_uploaded_file($_FILES[$this->name]["tmp_name"], $image_full_path)) {
-        return $image_path_array;
-      }
-
-      throwException('بارگذاری تصیر با مشکل مواجه شد! لطفا دوباره امتحان کنید.');
-      return false;
-    } catch (Exception $e) {
-      setErrorInSession($this->name, $e->getMessage());
-
-      return false;
-    }
+      return [
+        'image_file_type' => $image_file_type,
+        'image_size' => $image_size
+      ];
   }
 
-  public function checkRequestHasFile($name)
+  public static function checkRequestHasFile($name)
   {
     return (isset($_FILES[$name]) && $_FILES[$name]['name']);
   }
@@ -97,5 +71,4 @@ class ImageUpload
   {
     return file_exists($target_path) ? $this->createFileName($name, $image_dir, $type)['image_full_path'] : $target_path;
   }
-
 }
